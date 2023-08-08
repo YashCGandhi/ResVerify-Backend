@@ -1,0 +1,9 @@
+.env
+
+/assets
+
+root.crt
+
+venv/
+
+__pycache__/
