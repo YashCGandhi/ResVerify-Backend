@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from pprint import pprint
-
+from time import time
 from affinda import AffindaAPI, TokenCredential
 from affinda.models import WorkspaceCreate, CollectionCreate
 
@@ -16,7 +16,7 @@ my_organisation = client.get_all_organizations()[0]
 
 workspace_body = WorkspaceCreate(
     organization=my_organisation.identifier,
-    name="My Workspace",
+    name="My Workspace"+str(time()),
 )
 recruitment_workspace = client.create_workspace(body=workspace_body)
 
