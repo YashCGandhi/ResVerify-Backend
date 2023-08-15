@@ -1,6 +1,13 @@
 import os
 from flask import Flask, jsonify, request, send_file
 import base64
+from descope import (
+    REFRESH_SESSION_TOKEN_NAME,
+    SESSION_TOKEN_NAME,
+    AuthException,
+    DeliveryMethod,
+    DescopeClient,
+)
 
 app = Flask(__name__)
 
@@ -38,15 +45,34 @@ def pdf_to_base64(file_path):
         return jsonify(pdfBase64=encoded_pdf)
 
 
-@app.route("/resume", methods=["GET"])
-def sendResume():
+# Not in use ... replace this with sending work exp, edu and tokens for the form.
+# @app.route("/resume", methods=["GET"])
+# def sendResume():
+#     try:
+#         file_path = upload_folder + "/Yash_Chinmay_Gandhi_CV.pdf"
+#         pdf = pdf_to_base64(file_path)
+#         return pdf
+#     except Exception as e:
+#         response = jsonify(message=e)
+#         response.status = 500
+#         return response
+
+
+@app.route("/protected", methods=["GET"])
+def protected():
+    session_token = request.headers["Authorization"].split(" ")[1]
+
     try:
-        file_path = upload_folder + "/Yash_Chinmay_Gandhi_CV.pdf"
-        pdf = pdf_to_base64(file_path)
-        return pdf
+        descope_client = DescopeClient(project_id="P2Txkg4qcMNQyXeT5TBoRwIogRch")
+        jwt_response = descope_client.validate_session(session_token=session_token)
+        print("Successful Validation")
+
+        response = jsonify(message="Secret Code, Validated!")
+        response.status_code = 200
+        return response
     except Exception as e:
         response = jsonify(message=e)
-        response.status = 500
+        response.status = 401
         return response
 
 
