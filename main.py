@@ -50,7 +50,7 @@ def main(conf):
     # bulk_insert(yb)
     # insert_user(yb)
     # update_user(yb)
-    select_users(yb)
+    # select_users(yb)
     # delete_user(yb)
     # select_users(yb)
     yb.close()
