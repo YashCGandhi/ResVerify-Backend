@@ -1,3 +1,4 @@
+import json
 import os
 from flask import Flask, jsonify, request, send_file
 import base64
@@ -56,6 +57,19 @@ def pdf_to_base64(file_path):
 #         response = jsonify(message=e)
 #         response.status = 500
 #         return response
+
+
+@app.route("/updatetokens", methods=["POST"])
+def update_tokens():
+    try:
+        data = json.loads(request.form["updatedtokens"])
+        response = jsonify(message="Ok")
+        response.status_code = 200
+        return response
+    except Exception as e:
+        response = jsonify(message=e)
+        response.status = 401
+        return response
 
 
 @app.route("/protected", methods=["GET"])
