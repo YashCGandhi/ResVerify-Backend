@@ -22,6 +22,13 @@ except Exception as e:
     app.logger.error("Exception occured: {}".format(e))
 
 
+@app.route("/test", methods=["GET"])
+def test():
+    response = jsonify(message="Success")
+    response.status_code = 200
+    return response
+
+
 @app.route("/resume", methods=["POST"])
 def getResume():
     try:
