@@ -24,9 +24,14 @@ except Exception as e:
 
 @app.route("/test", methods=["GET"])
 def test():
-    response = jsonify(message="Success")
-    response.status_code = 200
-    return response
+    try:
+        response = jsonify(message="Success")
+        response.status_code = 200
+        return response
+    except Exception as e:
+        response = jsonify(message=e)
+        response.status = 500
+        return response
 
 
 @app.route("/resume", methods=["POST"])
