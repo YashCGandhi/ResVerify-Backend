@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import os
 import psycopg2
 import psycopg2.extras
+from db import db_connect, db_disconnect
+
 
 load_dotenv()
 
@@ -16,7 +18,7 @@ config = {
     "sslRootCert": os.getenv("CRT_ADDR"),
 }
 
-
+"""
 def main(conf):
     print(">>>> Connecting to YugabyteDB!")
 
@@ -50,7 +52,7 @@ def main(conf):
     # bulk_insert(yb)
     # insert_user(yb)
     # update_user(yb)
-    # select_users(yb)
+    select_users(yb)
     # delete_user(yb)
     # select_users(yb)
     yb.close()
@@ -72,9 +74,6 @@ def select_users(yb):
 
 
 # def bulk_insert(yb):
-#     data = """
-
-# """
 #     data = data.replace("'", "")
 #     lines = data.strip().split("\n")
 #     data_list = [line.split(",") for line in lines]
@@ -122,8 +121,10 @@ def delete_user(yb):
     except Exception as e:
         print("Error occured while performing delete")
         print(e)
-
+"""
 
 if __name__ == "__main__":
-    main(config)
+    # main(config)
+    yb = db_connect(config)
+    db_disconnect(yb)
     app.run(debug=True)
