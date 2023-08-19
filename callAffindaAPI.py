@@ -39,19 +39,9 @@ def callAffinda(path):
         "education": resume["data"]["education"],
         "work_experience": resume["data"]["work_experience"],
     }
-    # file_data = ast.literal_eval(resume)
+    
 
-    # Checking the keys at the top level of the dictionary to understand the structure
-    file_data.keys()
-
-    # Extracting the education details
-    education_details = file_data["data"]["education"]
-    pprint(education_details)
-
-    # Extracting the work experience details
-    work_experience_details = file_data["data"]["work_experience"]
-    # return education_details, work_experience_details
-    return file_data
+   
 
 
 if "__main__" == __name__:
